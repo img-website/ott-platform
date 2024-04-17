@@ -13,7 +13,7 @@ const Sidebar = () => {
                 </Link>
                 <SidebarMenu />
                 <div className='w-full'>
-                    <Button color="danger" variant="solid" className='w-full' endContent={<IoMdLogOut />} >
+                    <Button color="danger" variant="solid" className='w-full font-medium' endContent={<IoMdLogOut />} >
                         Logout
                     </Button>
                 </div>
