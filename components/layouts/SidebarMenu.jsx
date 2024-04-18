@@ -10,8 +10,9 @@ import { FaBox, FaRegUserCircle } from "react-icons/fa";
 import { WiStars } from "react-icons/wi";
 import { usePathname } from 'next/navigation';
 
-const SidebarMenu = () => {
+const SidebarMenu = ({sidebarIsOpen, setSidebarIsOpen}) => {
     const pathname = usePathname();
+    console.log(setSidebarIsOpen);
 
     const sideLinks = [
         { href: '/', label: 'Home', icon: TbBrandGoogleHome },
@@ -28,7 +29,7 @@ const SidebarMenu = () => {
         <div className="flex flex-col py-8 overflow-hidden -mr-5 grow">
             <div className='flex flex-col overflow-auto h-full pr-5'>
                 {sideLinks?.map(link => (
-                    <Link href={link?.href} key={link?.href} className={`flex items-center sm:gap-3 gap-2 py-3 px-4 rounded-lg text-gray-300 md:hover:text-white md:hover:bg-gray-900 duration-300 font-medium ${pathname == link.href ? '!text-white !bg-indigo-600' : ''}`}>
+                    <Link href={link?.href} key={link?.href} onClick={()=>{setSidebarIsOpen(false)}} className={`flex items-center sm:gap-3 gap-2 py-3 px-4 rounded-lg text-gray-300 md:hover:text-white md:hover:bg-gray-900 duration-300 font-medium ${pathname == link.href ? '!text-white !bg-indigo-600' : ''}`}>
                         <div className="icon xl:*:size-5 *:size-4">
                             {link.icon && <link.icon />}
                         </div>
