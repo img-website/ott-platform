@@ -14,5 +14,8 @@ module.exports = {
       'poppins': ['"Poppins", sans-serif'],
     }
   },
-  plugins: [nextui()],
+  plugins: [
+    nextui(),
+    require('autoprefixer')
+  ],
 };
