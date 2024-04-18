@@ -4,7 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { CgMenuRightAlt } from "react-icons/cg";
 import Link from "next/link";
-const Navbar = () => {
+const Navbar = ({sidebarIsOpen, setSidebarIsOpen}) => {
     return (
         <div className="flex items-center justify-between p-4 lg:p-8">
             <Link href={'/'} title='Logoipsum' className="w-full fill-white md:*:w-48 *:w-36 *:aspect-[344/62] lg:hidden">
@@ -40,7 +40,7 @@ const Navbar = () => {
                         </Button>
                     </Badge>
 
-                    <Button isIconOnly className="text-white border-gray-50/20 text-2xl lg:hidden" variant="bordered" aria-label="Menu">
+                    <Button onClick={()=>{setSidebarIsOpen(!sidebarIsOpen)}} isIconOnly className="text-white border-gray-50/20 text-2xl lg:hidden" variant="bordered" aria-label="Menu">
                         <CgMenuRightAlt />
                     </Button>
 
