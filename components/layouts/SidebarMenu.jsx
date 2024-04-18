@@ -10,9 +10,8 @@ import { FaBox, FaRegUserCircle } from "react-icons/fa";
 import { WiStars } from "react-icons/wi";
 import { usePathname } from 'next/navigation';
 
-const SidebarMenu = ({sidebarIsOpen, setSidebarIsOpen}) => {
+const SidebarMenu = ({setSidebarIsOpen}) => {
     const pathname = usePathname();
-    console.log(setSidebarIsOpen);
 
     const sideLinks = [
         { href: '/', label: 'Home', icon: TbBrandGoogleHome },
