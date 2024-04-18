@@ -11,9 +11,9 @@ export default function MainLayoutContent({ children }) {
   return (
     <html lang="en">
       <body className="font-poppins">
-        <div className="flex h-dvh min-h-svh bg-gray-950 text-white overflow-hidden relative p-5">
+        <div className="flex h-dvh min-h-svh bg-gray-950 text-white overflow-hidden relative lg:px-5">
           <Sidebar />
-          <div className="grow flex flex-col last:[&_*:has(.error)]:flex last:[&_*:has(.error)]:flex-col last:[&_*:has(.error)]:h-full">
+          <div className="grow flex overflow-hidden flex-col">
             <Navbar/>
             {children}
           </div>

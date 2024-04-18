@@ -1,8 +1,13 @@
 "use client"
+
+import HeroSwiper from "@/components/HeroSwiper";
+
 export default function Home() {
   return (
     <>
-    <h1>Hello</h1>
+      <div className="overflow-x-hidden overflow-y-auto px-8">
+        <HeroSwiper />
+      </div>
     </>
   );
 }

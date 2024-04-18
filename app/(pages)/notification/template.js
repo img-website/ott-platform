@@ -1,3 +1,3 @@
 export default function Template({ children }) {
-    return <>{children}</>
+    return <div>{children}</div>
 }

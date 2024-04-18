@@ -6,7 +6,7 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { TbPlaystationTriangle } from "react-icons/tb";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { FiEdit3 } from "react-icons/fi";
-import { FaBox } from "react-icons/fa";
+import { FaBox, FaRegUserCircle } from "react-icons/fa";
 import { WiStars } from "react-icons/wi";
 import { usePathname } from 'next/navigation';
 
@@ -22,6 +22,7 @@ const SidebarMenu = () => {
         { href: '/trending', label: 'Trending', icon: FaArrowTrendUp },
         { href: '/blog', label: 'Blog', icon: FiEdit3 },
         { href: '/terabox-pro-free', label: 'Terabox PRO', icon: FaBox },
+        { href: '/profile', label: 'Profile', icon: FaRegUserCircle },
     ];
     return (
         <div className="flex flex-col py-8 overflow-hidden -mr-5 grow">
