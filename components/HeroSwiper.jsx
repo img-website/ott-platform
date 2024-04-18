@@ -98,28 +98,28 @@ const HeroSwiper = () => {
                 className="mySwiper w-full !pt-4 !pb-8 sm:[&_.swiper-wrapper_.swiper-slide]:opacity-0 sm:[&_.swiper-wrapper_.swiper-slide-visible]:!opacity-100 [&_.swiper-wrapper_.swiper-slide]:transition-all [&_.swiper-pagination-bullet]:!bg-gray-100 max-sm:!overflow-visible"
             >
                 <SwiperSlide className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900'>
-                    <Image priority className='w-full aspect-[10/15]' width={200} height={200} src="https://swiperjs.com/demos/images/nature-1.jpg" alt='Hero Swiper' />
+                    <Image priority className='w-full aspect-[10/15] object-cover' width={200} height={200} src="https://swiperjs.com/demos/images/nature-1.jpg" alt='Hero Swiper' />
                 </SwiperSlide>
                 <SwiperSlide className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900'>
-                    <Image priority className='w-full aspect-[10/15]' width={200} height={200} src="https://swiperjs.com/demos/images/nature-2.jpg" alt='Hero Swiper' />
+                    <Image priority className='w-full aspect-[10/15] object-cover' width={200} height={200} src="https://swiperjs.com/demos/images/nature-2.jpg" alt='Hero Swiper' />
                 </SwiperSlide>
                 <SwiperSlide className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900'>
-                    <Image priority className='w-full aspect-[10/15]' width={200} height={200} src="https://swiperjs.com/demos/images/nature-3.jpg" alt='Hero Swiper' />
+                    <Image priority className='w-full aspect-[10/15] object-cover' width={200} height={200} src="https://swiperjs.com/demos/images/nature-3.jpg" alt='Hero Swiper' />
                 </SwiperSlide>
                 <SwiperSlide className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900'>
-                    <Image priority className='w-full aspect-[10/15]' width={200} height={200} src="https://swiperjs.com/demos/images/nature-4.jpg" alt='Hero Swiper' />
+                    <Image priority className='w-full aspect-[10/15] object-cover' width={200} height={200} src="https://swiperjs.com/demos/images/nature-4.jpg" alt='Hero Swiper' />
                 </SwiperSlide>
                 <SwiperSlide className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900'>
-                    <Image priority className='w-full aspect-[10/15]' width={200} height={200} src="https://swiperjs.com/demos/images/nature-5.jpg" alt='Hero Swiper' />
+                    <Image priority className='w-full aspect-[10/15] object-cover' width={200} height={200} src="https://swiperjs.com/demos/images/nature-5.jpg" alt='Hero Swiper' />
                 </SwiperSlide>
                 <SwiperSlide className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900'>
-                    <Image priority className='w-full aspect-[10/15]' width={200} height={200} src="https://swiperjs.com/demos/images/nature-6.jpg" alt='Hero Swiper' />
+                    <Image priority className='w-full aspect-[10/15] object-cover' width={200} height={200} src="https://swiperjs.com/demos/images/nature-6.jpg" alt='Hero Swiper' />
                 </SwiperSlide>
                 <SwiperSlide className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900'>
-                    <Image priority className='w-full aspect-[10/15]' width={200} height={200} src="https://swiperjs.com/demos/images/nature-7.jpg" alt='Hero Swiper' />
+                    <Image priority className='w-full aspect-[10/15] object-cover' width={200} height={200} src="https://swiperjs.com/demos/images/nature-7.jpg" alt='Hero Swiper' />
                 </SwiperSlide>
                 <SwiperSlide className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900'>
-                    <Image priority className='w-full aspect-[10/15]' width={200} height={200} src="https://swiperjs.com/demos/images/nature-8.jpg" alt='Hero Swiper' />
+                    <Image priority className='w-full aspect-[10/15] object-cover' width={200} height={200} src="https://swiperjs.com/demos/images/nature-8.jpg" alt='Hero Swiper' />
                 </SwiperSlide>
             </Swiper>
         </>
