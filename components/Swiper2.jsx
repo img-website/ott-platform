@@ -20,10 +20,10 @@ const Swiper2 = ({heading}) => {
                         <Button color="warning" className='text-gray-100 border-gray-100/50 mr-1 max-md:!h-8 max-md:!min-h-8' variant="bordered" aria-label="View All">
                             View All
                         </Button>
-                        <Button ref={navigationPrevRef} isIconOnly color="danger" className='text-xl max-md:!w-8 max-md:!min-w-8 max-md:!h-8 max-md:!min-h-8 [&.swiper-button-disabled]:opacity-50' aria-label="Prev">
+                        <Button ref={navigationPrevRef} isIconOnly color="danger" className='text-xl max-md:!w-8 max-md:!min-w-8 max-md:!h-8 max-md:!min-h-8 [&.swiper-button-disabled]:opacity-50 max-md:hidden' aria-label="Prev">
                             <FiChevronLeft />
                         </Button>
-                        <Button ref={navigationNextRef} isIconOnly color="danger" className='text-xl max-md:!w-8 max-md:!min-w-8 max-md:!h-8 max-md:!min-h-8 [&.swiper-button-disabled]:opacity-50' aria-label="Next">
+                        <Button ref={navigationNextRef} isIconOnly color="danger" className='text-xl max-md:!w-8 max-md:!min-w-8 max-md:!h-8 max-md:!min-h-8 [&.swiper-button-disabled]:opacity-50 max-md:hidden' aria-label="Next">
                             <FiChevronRight />
                         </Button>
                     </div>
