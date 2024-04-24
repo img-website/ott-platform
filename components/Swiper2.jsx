@@ -13,7 +13,7 @@ const Swiper2 = ({ heading }) => {
     const navigationPrevRef = useRef(null)
     const navigationNextRef = useRef(null)
     return (
-        <div className='py-8 px-4 md:px-8'>
+        <div className='md:py-8 py-6 px-0 md:px-8'>
             <div className='flex items-center pb-3'>
                 <div className='grow lg:text-xl md:text-lg text-base font-semibold text-gray-100'>{heading ? heading : "Send 'heading' prop"}</div>
                 <div className='w-auto'>
