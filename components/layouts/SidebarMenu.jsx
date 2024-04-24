@@ -1,10 +1,11 @@
 
 import Link from 'next/link';
 import { TbBrandGoogleHome } from "react-icons/tb";
-import { TbCategory } from "react-icons/tb";
+// import { TbCategory } from "react-icons/tb";
 import { MdFavoriteBorder } from "react-icons/md";
 import { TbPlaystationTriangle } from "react-icons/tb";
 import { FaArrowTrendUp } from "react-icons/fa6";
+// import { FiEdit3 } from "react-icons/fi";
 import { FaBox, FaRegUserCircle } from "react-icons/fa";
 import { WiStars } from "react-icons/wi";
 import { usePathname } from 'next/navigation';
@@ -15,10 +16,11 @@ const SidebarMenu = ({setSidebarIsOpen}) => {
     const sideLinks = [
         { href: '/', label: 'Home', icon: TbBrandGoogleHome },
         { href: '/new-viral', label: 'New Viral', icon: WiStars },
-        { href: '/categories', label: 'Categories', icon: TbCategory },
+        // { href: '/categories', label: 'Categories', icon: TbCategory },
         { href: '/favorite', label: 'Favorite', icon: MdFavoriteBorder },
         { href: '/viral-videos', label: 'Viral Videos', icon: TbPlaystationTriangle },
         { href: '/trending', label: 'Trending', icon: FaArrowTrendUp },
+        // { href: '/blog', label: 'Blog', icon: FiEdit3 },
         { href: '/terabox-pro-free', label: 'Terabox PRO', icon: FaBox },
         { href: '/profile', label: 'Profile', icon: FaRegUserCircle },
     ];

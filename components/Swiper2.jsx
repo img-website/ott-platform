@@ -71,7 +71,6 @@ const Swiper2 = ({ heading }) => {
                 className="mySwiper w-full !pt-2 !pb-3 [&_.swiper-pagination-bullet]:!bg-gray-100 md:[&_.swiper-pagination-bullet]:hidden"
             >
                 <SwiperSlide className='p-1 relative group'>
-
                     <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
                         <FaRegHeart />
                     </Button>
@@ -79,7 +78,6 @@ const Swiper2 = ({ heading }) => {
                     <div className='md:text-sm text-xs text-gray-100 line-clamp-2 my-2 mx-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt quia iusto vel, repellat nihil</div>
                 </SwiperSlide>
                 <SwiperSlide className='p-1 relative group'>
-
                     <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
                         <FaRegHeart />
                     </Button>
@@ -87,7 +85,6 @@ const Swiper2 = ({ heading }) => {
                     <div className='md:text-sm text-xs text-gray-100 line-clamp-2 my-2 mx-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt quia iusto vel, repellat nihil</div>
                 </SwiperSlide>
                 <SwiperSlide className='p-1 relative group'>
-
                     <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
                         <FaRegHeart />
                     </Button>
@@ -95,7 +92,6 @@ const Swiper2 = ({ heading }) => {
                     <div className='md:text-sm text-xs text-gray-100 line-clamp-2 my-2 mx-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt quia iusto vel, repellat nihil</div>
                 </SwiperSlide>
                 <SwiperSlide className='p-1 relative group'>
-
                     <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
                         <FaRegHeart />
                     </Button>
@@ -103,7 +99,6 @@ const Swiper2 = ({ heading }) => {
                     <div className='md:text-sm text-xs text-gray-100 line-clamp-2 my-2 mx-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt quia iusto vel, repellat nihil</div>
                 </SwiperSlide>
                 <SwiperSlide className='p-1 relative group'>
-
                     <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
                         <FaRegHeart />
                     </Button>
@@ -111,7 +106,6 @@ const Swiper2 = ({ heading }) => {
                     <div className='md:text-sm text-xs text-gray-100 line-clamp-2 my-2 mx-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt quia iusto vel, repellat nihil</div>
                 </SwiperSlide>
                 <SwiperSlide className='p-1 relative group'>
-
                     <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
                         <FaRegHeart />
                     </Button>
