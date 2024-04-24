@@ -1,5 +1,4 @@
 "use client"
-
 import HeroSwiper from "@/components/HeroSwiper";
 import Swiper2 from "@/components/Swiper2";
 
@@ -14,3 +13,4 @@ export default function Home() {
     </>
   );
 }
+
