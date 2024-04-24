@@ -7,7 +7,7 @@ import { FaRegHeart } from "react-icons/fa"
 const NewViral = () => {
     return (
         <>
-            <div className="overflow-x-hidden overflow-y-auto px-4 md:px-8">
+            <div className="overflow-x-hidden overflow-y-auto px-0 md:px-8">
                 <ul className="grid xl:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-4 gap-2">
                     <li className='p-1 relative group'>
                         <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
