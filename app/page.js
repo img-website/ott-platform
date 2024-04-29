@@ -4,16 +4,25 @@ import Swiper2 from "@/components/Swiper2";
 import {useAuthState} from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [user] = useAuthState(auth);
   const router = useRouter();
-  if (typeof window !== 'undefined') {
-      const userSession = sessionStorage.getItem('user')
-  }
-  if(!user && userSession) {
-    router.push('/sign-up')
-  }
+  const [userSessionStorage, setUserSessionStorage] = useState('');
+
+  useEffect(()=> {
+    if (typeof window !== 'undefined') {
+      const userSession = sessionStorage.getItem('user');
+      setUserSessionStorage(userSession)
+    }
+  }, [])
+
+  useEffect(()=> {
+    if(!user && userSessionStorage) {
+      router.push('/sign-up')
+    }
+  }, [user, userSessionStorage])
 
   return (
     <>

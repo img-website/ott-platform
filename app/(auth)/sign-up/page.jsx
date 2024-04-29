@@ -17,9 +17,7 @@ const SignUp = () => {
         try {
             const res = await createUserWithEmailAndPassword(email, password)
             console.log({ res })
-            if (typeof window !== 'undefined') {
-                sessionStorage.setItem('user', true)
-            }
+            sessionStorage.setItem('user', true)
             setEmail('')
             setPassword('')
             router.push('/')

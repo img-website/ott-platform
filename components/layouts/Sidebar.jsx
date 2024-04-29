@@ -40,9 +40,7 @@ const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }) => {
                             onClick={() => { 
                                 setSidebarIsOpen(false) 
                                 signOut(auth)
-                                if (typeof window !== 'undefined') {
-                                    sessionStorage.removeItem('user')
-                                }
+                                sessionStorage.removeItem('user')
                             }} 
                             variant="solid" className='w-full font-medium xl:text-base text-sm bg-rose-600 text-white' endContent={<IoMdLogOut />} >
                             Logout
