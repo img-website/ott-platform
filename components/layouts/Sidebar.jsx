@@ -7,6 +7,8 @@ import { FaTelegram } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { BsFillThreadsFill } from "react-icons/bs";
+import { signOut } from 'firebase/auth';
+import { auth } from '@/app/firebase/config';
 
 const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }) => {
     return (
@@ -34,7 +36,13 @@ const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }) => {
                         </Button>
                     </div>
                     <div className='w-full'>
-                        <Button onClick={() => { setSidebarIsOpen(false) }} variant="solid" className='w-full font-medium xl:text-base text-sm bg-rose-600 text-white' endContent={<IoMdLogOut />} >
+                        <Button 
+                            onClick={() => { 
+                                setSidebarIsOpen(false) 
+                                signOut(auth)
+                                sessionStorage.removeItem('user')
+                            }} 
+                            variant="solid" className='w-full font-medium xl:text-base text-sm bg-rose-600 text-white' endContent={<IoMdLogOut />} >
                             Logout
                         </Button>
                     </div>

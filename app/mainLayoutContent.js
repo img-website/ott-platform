@@ -11,7 +11,7 @@ export const metadata = {
 export default function MainLayoutContent({ children }) {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false)
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body className="font-poppins">
         <div className="flex h-dvh min-h-svh bg-gray-950 text-white overflow-hidden relative lg:px-5">
           <Sidebar sidebarIsOpen={sidebarIsOpen} setSidebarIsOpen={setSidebarIsOpen} />
