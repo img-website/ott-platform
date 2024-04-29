@@ -8,7 +8,9 @@ import { useRouter } from 'next/navigation'
 export default function Home() {
   const [user] = useAuthState(auth);
   const router = useRouter();
-  const userSession = sessionStorage.getItem('user')
+  if (typeof window !== 'undefined') {
+      const userSession = sessionStorage.getItem('user')
+  }
   if(!user && userSession) {
     router.push('/sign-up')
   }
