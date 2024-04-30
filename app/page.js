@@ -53,12 +53,12 @@ export default function Home() {
     fetchData();
   },[])
 
-  console.log("ee",messageData);
+  // console.log("ee",messageData);
 
   return (
     <>
       <div className="overflow-x-hidden overflow-y-auto px-4 md:px-8">
-        <HeroSwiper />
+        <HeroSwiper messageData={messageData} />
         <Swiper2 heading={"Trending Clips"} />
         <Swiper2 heading={"New Viral"} />
       </div>

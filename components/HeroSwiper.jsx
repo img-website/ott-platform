@@ -8,7 +8,8 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 import { Button } from '@nextui-org/button';
 import { FaRegHeart } from 'react-icons/fa';
 
-const HeroSwiper = ({messageData}) => {
+const HeroSwiper = ({ messageData }) => {
+    console.log("aaya", messageData);
     return (
         <>
             <Swiper
@@ -99,13 +100,15 @@ const HeroSwiper = ({messageData}) => {
                 modules={[EffectCoverflow, Pagination]}
                 className="mySwiper w-full !pt-4 !pb-8 sm:[&_.swiper-wrapper_.swiper-slide]:opacity-0 sm:[&_.swiper-wrapper_.swiper-slide-visible]:!opacity-100 [&_.swiper-wrapper_.swiper-slide]:transition-all [&_.swiper-pagination-bullet]:!bg-gray-100 max-sm:!overflow-visible"
             >
-                <SwiperSlide className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900 relative group'>
-                    <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
-                        <FaRegHeart />
-                    </Button>
-                    <Image priority className='w-full aspect-[10/15] object-cover' width={200} height={200} src="https://image.tmdb.org/t/p/w500/9GBhzXMFjgcZ3FdR9w3bUMMTps5.jpg" alt='Hero Swiper' />
-                </SwiperSlide>
-                <SwiperSlide className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900 relative group'>
+                {messageData.map((item) => {
+                    <SwiperSlide className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900 relative group'>
+                        <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
+                            <FaRegHeart />
+                        </Button>
+                        <Image className='w-full aspect-[10/15] object-cover' width={200} height={200} src={item?.image} alt='Hero Swiper' />
+                    </SwiperSlide>
+                })}
+                {/* <SwiperSlide className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900 relative group'>
                     <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
                         <FaRegHeart />
                     </Button>
@@ -146,7 +149,7 @@ const HeroSwiper = ({messageData}) => {
                         <FaRegHeart />
                     </Button>
                     <Image priority className='w-full aspect-[10/15] object-cover' width={200} height={200} src="https://image.tmdb.org/t/p/w1280/6EkAgDsYoVUzbmALIhxH5rQ1PO6.jpg" alt='Hero Swiper' />
-                </SwiperSlide>
+                </SwiperSlide> */}
             </Swiper>
         </>
     )
