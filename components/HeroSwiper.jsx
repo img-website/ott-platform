@@ -8,7 +8,7 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 import { Button } from '@nextui-org/button';
 import { FaRegHeart } from 'react-icons/fa';
 
-const HeroSwiper = () => {
+const HeroSwiper = ({messageData}) => {
     return (
         <>
             <Swiper
