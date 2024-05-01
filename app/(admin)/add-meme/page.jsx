@@ -12,7 +12,7 @@ import { FaRegImages } from "react-icons/fa";
 
 const addDataToFireStore = async (name, downloadURL) => {
     try {
-        const docRef = await addDoc(collection(db, "messages"), {
+        const docRef = await addDoc(collection(db, "allmemes"), {
             name: name,
             image: downloadURL,
             wishlist: false
@@ -57,7 +57,6 @@ const AddMeme = () => {
 
     return (
         <>
-
             <div className="overflow-x-hidden overflow-y-auto px-4 md:px-8">
                 <Card as={"form"} onSubmit={upload} className="max-w-[400px] bg-gray-800 text-white mx-auto has-[[aria-label=Loading]]:pointer-events-none">
                     <CardHeader className="flex gap-3">

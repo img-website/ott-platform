@@ -7,9 +7,14 @@ import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import { Button } from '@nextui-org/button';
 import { FaRegHeart } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
 
-const HeroSwiper = ({ messageData }) => {
-    console.log(messageData);
+const HeroSwiper = ({ allMeme }) => {
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        setData(allMeme)
+    }, [allMeme])
     return (
         <>
             <Swiper
@@ -100,14 +105,14 @@ const HeroSwiper = ({ messageData }) => {
                 modules={[EffectCoverflow, Pagination]}
                 className="mySwiper w-full !pt-4 !pb-8 sm:[&_.swiper-wrapper_.swiper-slide]:opacity-0 sm:[&_.swiper-wrapper_.swiper-slide-visible]:!opacity-100 [&_.swiper-wrapper_.swiper-slide]:transition-all [&_.swiper-pagination-bullet]:!bg-gray-100 max-sm:!overflow-visible"
             >
-                {messageData.map((item) => 
+                {data && Array.isArray(data) && data.map((item) => (
                     <SwiperSlide key={item?.id} className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900 relative group'>
                         <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
                             <FaRegHeart />
                         </Button>
                         <Image className='w-full aspect-[10/15] object-cover' width={200} height={200} src={item?.image} alt='Hero Swiper' />
                     </SwiperSlide>
-                )}
+                ))}
             </Swiper>
         </>
     )

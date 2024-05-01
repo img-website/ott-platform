@@ -2,14 +2,14 @@
 import HeroSwiper from "@/components/HeroSwiper";
 import Swiper2 from "@/components/Swiper2";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db,storage } from "@/app/firebase/config";
+import { auth, db, storage } from "@/app/firebase/config";
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from "react";
-import { collection,getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 
 const fetchDataFromFirestore = async () => {
-  const querySnapshot = await getDocs(collection(db,"messages"))
+  const querySnapshot = await getDocs(collection(db,"allmemes"))
 
   const data = [];
   querySnapshot.forEach((doc) => {
@@ -23,7 +23,7 @@ export default function Home() {
   const [user] = useAuthState(auth);
   const router = useRouter();
   const [userSessionStorage, setUserSessionStorage] = useState('');
-  const [messageData, setMessageData] = useState([]);
+  const [allMeme, setAllMeme] = useState([]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -44,21 +44,23 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const data = await fetchDataFromFirestore();
-        setMessageData(data)  
+        setAllMeme(data)  
       } catch (error) {
-        console.log("errror" , error)
+        console.log("error" , error)
       }
       
     }
     fetchData();
   },[])
 
-  // console.log("ee",messageData);
+  // console.log("ee",allMeme);
 
   return (
     <>
       <div className="overflow-x-hidden overflow-y-auto px-4 md:px-8">
-        <HeroSwiper messageData={messageData} />
+        {
+          allMeme.length ? <HeroSwiper allMeme={allMeme} /> : ''
+        }
         <Swiper2 heading={"Trending Clips"} />
         <Swiper2 heading={"New Viral"} />
       </div>
