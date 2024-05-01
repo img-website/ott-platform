@@ -10,12 +10,14 @@ import { RxReset } from "react-icons/rx";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import { FaRegImages } from "react-icons/fa";
 
-const addDataToFireStore = async (name, downloadURL) => {
+const addDataToFireStore = async (name, imagePath) => {
     try {
         const docRef = await addDoc(collection(db, "allmemes"), {
             name: name,
-            image: downloadURL,
-            wishlist: false
+            image: imagePath,
+
+            wishlist: false,
+
         });
         // console.log("Document written with ID: ", docRef.id);
         return true;
@@ -30,8 +32,8 @@ const AddMeme = () => {
     const [image, setImage] = useState("")
     const inputFileRef = useRef(null);
 
-    const handleSubmit = async (downloadURL) => {
-        const added = await addDataToFireStore(name, downloadURL);
+    const handleSubmit = async (imagePath) => {
+        const added = await addDataToFireStore(name, imagePath);
         if (added) {
             setName("");
             setImage("");
@@ -53,8 +55,8 @@ const AddMeme = () => {
         uploadBytes(storages, image)
             .then((snapshot) => {
                 getDownloadURL(snapshot.ref)
-                    .then((downloadURL) => {
-                        handleSubmit(downloadURL)
+                    .then((imagePath) => {
+                        handleSubmit(imagePath)
                     })
             })
 
@@ -107,6 +109,7 @@ const AddMeme = () => {
                                 startContent={<FaRegImages size={18} />}
                                 type="file"
                                 id="image"
+                                ref={inputFileRef}
                                 onChange={(e) => setImage(e.target.files?.[0])}
                             />
                         </div>
