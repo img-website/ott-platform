@@ -9,10 +9,15 @@ import { FaFacebook } from "react-icons/fa";
 import { BsFillThreadsFill } from "react-icons/bs";
 import { signOut } from 'firebase/auth';
 import { auth } from '@/app/firebase/config';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }) => {
     return (
         <>
+            <div>
+                <ToastContainer stacked />
+            </div>
             {sidebarIsOpen && <div className='fixed inset-0 z-40 backdrop-blur-lg' onClick={() => { setSidebarIsOpen(!sidebarIsOpen) }}></div>}
             <div className={`w-72 shrink-0 h-full lg:py-8 overflow-hidden max-lg:fixed max-lg:inset-y-0 max-lg:left-0 max-lg:z-50 max-lg:-translate-x-full ${sidebarIsOpen ? 'max-lg:translate-x-0' : ''}`}>
                 <div className="w-full bg-gray-800 lg:rounded-3xl shadow-lg h-full overflow-hidden p-5 flex flex-col">
@@ -36,12 +41,12 @@ const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }) => {
                         </Button>
                     </div>
                     <div className='w-full'>
-                        <Button 
-                            onClick={() => { 
-                                setSidebarIsOpen(false) 
+                        <Button
+                            onClick={() => {
+                                setSidebarIsOpen(false)
                                 signOut(auth)
                                 sessionStorage.removeItem('user')
-                            }} 
+                            }}
                             variant="solid" className='w-full font-medium xl:text-base text-sm bg-rose-600 text-white' endContent={<IoMdLogOut />} >
                             Logout
                         </Button>
