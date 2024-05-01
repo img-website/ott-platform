@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { db, storage } from "@/app/firebase/config";
 import { addDoc, collection } from "firebase/firestore";
 import { Card, CardHeader, CardBody, CardFooter, Divider, Button, Input } from "@nextui-org/react";
@@ -28,12 +28,18 @@ const addDataToFireStore = async (name, downloadURL) => {
 const AddMeme = () => {
     const [name, setName] = useState("");
     const [image, setImage] = useState("")
+    const inputFileRef = useRef(null);
 
     const handleSubmit = async (downloadURL) => {
         const added = await addDataToFireStore(name, downloadURL);
         if (added) {
             setName("");
             setImage("");
+
+            // Reset input file
+            if (inputFileRef.current) {
+              inputFileRef.current.value = ""; // Reset the value to clear the selected file
+            }
 
             alert("Data added to firestore DB!");
         }
@@ -48,7 +54,6 @@ const AddMeme = () => {
             .then((snapshot) => {
                 getDownloadURL(snapshot.ref)
                     .then((downloadURL) => {
-                        // console.log("downloadURL", { downloadURL })
                         handleSubmit(downloadURL)
                     })
             })
