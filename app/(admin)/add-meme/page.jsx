@@ -74,21 +74,22 @@ const AddMeme = () => {
         setCategory(e.target.value);
     };
 
+    const resetForm = () => {
+        setName("");
+        setImage("");
+        setUrl("");
+        setStatus("2");
+        setCategory("3");
+        if (inputFileRef.current) {
+            inputFileRef.current.value = "";
+        }
+    }
+
     const handleSubmit = async (downloadURL) => {
         setIsLoading(true)
         const added = await addDataToFireStore(name, downloadURL, url, status, category);
         if (added) {
-            setName("");
-            setImage("");
-            setUrl("")
-            setStatus("")
-            setCategory("")
-
-            // Reset input file
-            if (inputFileRef.current) {
-                inputFileRef.current.value = ""; // Reset the value to clear the selected file
-            }
-
+            resetForm()
             toast.success("Meme Added Successfuly!");
             setIsLoading(false);
         } else {
@@ -100,7 +101,7 @@ const AddMeme = () => {
         e.preventDefault();
         if (image == null)
             return;
-        
+
         setIsLoading(true)
         const storages = ref(storage, `/images/${image.name}`)
         uploadBytes(storages, image)
@@ -117,25 +118,32 @@ const AddMeme = () => {
         const fetchStatusData = async () => {
             try {
                 const statusData = await fetchStatusDataFromFirestore();
-                setStatusGetData(statusData)
+                setStatusGetData(statusData);
+                
+                if (statusData.length > 0) {
+                    setStatus(statusData[0]?.statusID);
+                }
             } catch (error) {
                 toast.error(error)
             }
-
         }
         fetchStatusData();
 
         const fetchCategoryData = async () => {
             try {
                 const categoryData = await fetchCategoryDataFromFirestore();
-                setCategoryGetData(categoryData)
+                setCategoryGetData(categoryData);
+                
+                if (categoryData.length > 0) {
+                    setCategory(categoryData[0]?.categoryID);
+                }
             } catch (error) {
                 toast.error(error)
             }
-
         }
         fetchCategoryData();
     }, [])
+
 
     return (
         <>
@@ -167,7 +175,7 @@ const AddMeme = () => {
                                 type="text"
                                 id="name"
                                 value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                onValueChange={setName}
                             />
                         </div>
                         <div className="mb-4">
@@ -187,7 +195,7 @@ const AddMeme = () => {
                                 type="url"
                                 id="url"
                                 value={url}
-                                onChange={(e) => setUrl(e.target.value)}
+                                onValueChange={setUrl}
                             />
                         </div>
                         <div className="mb-4">
@@ -276,16 +284,7 @@ const AddMeme = () => {
                                         Saving
                                     </Button>
                             }
-                            <Button type="button" onClick={() => {
-                                setName("");
-                                setImage("");
-                                setUrl("");
-                                setStatus("2");
-                                setCategory("3");
-                                if (inputFileRef.current) {
-                                    inputFileRef.current.value = ""; // Reset the value to clear the selected file
-                                }
-                            }} size="lg" variant="bordered" className="!w-1/2 border-gray-200/30 font-semibold text-white/70" startContent={<RxReset />}>
+                            <Button type="button" onClick={() => {resetForm()}} size="lg" variant="bordered" className="!w-1/2 border-gray-200/30 font-semibold text-white/70" startContent={<RxReset />}>
                                 Reset
                             </Button>
                         </div>
