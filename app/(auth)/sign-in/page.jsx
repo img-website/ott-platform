@@ -1,29 +1,35 @@
 "use client"
 import { auth } from '@/app/firebase/config';
+import { AuthContext } from '@/context/AuthContext';
 import { Button } from '@nextui-org/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
     const router = useRouter()
+    const { authData, setAuthData } = useContext(AuthContext)
 
+    if (authData?.isAuthenticated) {
+        router.push('/');
+        return null;
+    }
     const handleSignIn = async () => {
         try {
             const res = await signInWithEmailAndPassword(email, password)
-            if(res){
-                localStorage.setItem('token', res?.user?.uid)
+            if (res) {
+                setAuthData(pre => ({ ...pre, userId: res?.user?.uid, userData: res?.user, isAuthenticated: true }))
+                // localStorage.setItem('token', res?.user?.uid)
                 setEmail('')
                 setPassword('')
                 router.push('/')
             }
         } catch (error) {
-            console.error("error",error);
+            console.error("error", error);
         }
     }
     return (
