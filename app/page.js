@@ -12,7 +12,6 @@ export default function Home() {
   const fetchAllMemeData = async () => {
     try {
       const statusData = await getAllData('allmemes');
-      alert("runnnig")
       setAllMeme(statusData);
     } catch (error) {
       toast.error(error)

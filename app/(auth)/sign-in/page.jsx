@@ -16,13 +16,14 @@ const SignIn = () => {
     const handleSignIn = async () => {
         try {
             const res = await signInWithEmailAndPassword(email, password)
-            console.log(res)
-            sessionStorage.setItem('user', true)
-            setEmail('')
-            setPassword('')
-            router.push('/')
+            if(res){
+                localStorage.setItem('token', res?.user?.uid)
+                setEmail('')
+                setPassword('')
+                router.push('/')
+            }
         } catch (error) {
-            console.error(error);
+            console.error("error",error);
         }
     }
     return (
