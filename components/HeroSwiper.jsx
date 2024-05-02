@@ -112,7 +112,7 @@ const HeroSwiper = ({ allMeme }) => {
                             <FaRegHeart />
                         </Button>
                         <Link href={item?.url} target='_blank'>
-                            <Image className='w-full aspect-[10/15] object-cover' width={200} height={200} src={item?.image} alt={item?.name} />
+                            <Image className='w-full aspect-[10/15] object-cover' priority width={200} height={200} src={item?.image} alt={item?.name} />
                         </Link>
                     </SwiperSlide>
                 ))}

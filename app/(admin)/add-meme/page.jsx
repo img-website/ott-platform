@@ -60,8 +60,8 @@ const AddMeme = () => {
     const [name, setName] = useState("");
     const [image, setImage] = useState("")
     const [url, setUrl] = useState("")
-    const [status, setStatus] = useState("2")
-    const [category, setCategory] = useState("3")
+    const [status, setStatus] = useState(2)
+    const [category, setCategory] = useState(3)
     const inputFileRef = useRef(null);
 
     const [isLoading, setIsLoading] = useState(false);
@@ -78,8 +78,8 @@ const AddMeme = () => {
         setName("");
         setImage("");
         setUrl("");
-        setStatus("2");
-        setCategory("3");
+        setStatus(2);
+        setCategory(3);
         if (inputFileRef.current) {
             inputFileRef.current.value = "";
         }

@@ -1,7 +1,7 @@
 // import { getApp, getApps, initializeApp } from "firebase/app";
 import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore'
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
@@ -20,4 +20,40 @@ const auth = getAuth(app)
 const db = getFirestore(app)
 const storage = getStorage(app)
 
-export { app, auth, db ,storage }
+
+export const getAllData = async (collectionName) => {
+    try {
+        const dataCollection = collection(db, collectionName);
+        const snapshot = await getDocs(dataCollection);
+        const data = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })); // Extract data and add ID
+        return data;
+    } catch (error) {
+        console.error('error.message>>>>>>getAllData>>>>>>>', error);
+    }
+}
+
+export const getById = async (collectionName, filterByKey, filterOperator, filterValue) => {
+    try {
+        const dataCollection = collection(db, collectionName);
+        const q = query(dataCollection, where(filterByKey, filterOperator, filterValue)); // Query by email
+
+        const snapshot = await getDocs(q);
+        const data = snapshot.docs.length > 0 ? { ...snapshot.docs[0].data(), id: snapshot.docs[0].id } : null; // Extract data and add ID, or return null
+
+        return data; // Return the user object or null
+    } catch (error) {
+        console.error('error.message>>>>getById>>>>>>>>>', error);
+    }
+}
+
+export const create = async (collectionName, userData) => {
+    try {
+        const usersCollection = collection(db, collectionName);
+        const newDoc = await addDoc(usersCollection, userData);
+        return newDoc;
+    } catch (error) {
+        console.error('Error adding user:', error);
+    }
+};
+
+export { app, auth, db, storage }
