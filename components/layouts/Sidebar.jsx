@@ -13,13 +13,17 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useContext } from 'react';
 import { AuthContext } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }) => {
     const { authData, setAuthData } = useContext(AuthContext)
+    const router = useRouter()
 
-    const logoutHandler = async()=>{
-        // setAuthData(pre=>({...pre,}))
+
+    const logoutHandler = async () => {
         setAuthData(pre => ({ ...pre, userId: "", userData: {}, isAuthenticated: false }))
+        router.push('/sign-in')
+        signOut(auth)
 
     }
     return (
@@ -49,13 +53,16 @@ const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }) => {
                             <BsFillThreadsFill />
                         </Button>
                     </div>
-                    <div className='w-full'>
+                    {
+                        authData.isAuthenticated ? (<div className='w-full'>
                         <Button
                             onClick={logoutHandler}
                             variant="solid" className='w-full font-medium xl:text-base text-sm bg-rose-600 text-white' endContent={<IoMdLogOut />} >
                             Logout
                         </Button>
-                    </div>
+                    </div>):(<></>)
+                    }
+                    
                 </div>
             </div>
         </>
