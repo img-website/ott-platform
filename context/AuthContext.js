@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
-
+'use client'
+import React, { createContext, useEffect, useState } from 'react'
 
 export const AuthContext = createContext(null)
 
@@ -11,7 +11,6 @@ const AuthContextProvider = ({ children }) => {
     })
 
     useEffect(() => {
-        // setAuthData(pre => ({ ...pre, userId }))
         localStorage.setItem("token", authData?.userId)
     }, [authData?.userId])
     return (

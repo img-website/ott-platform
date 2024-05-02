@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { db, storage } from "@/app/firebase/config";
 import { addDoc, getDocs, collection } from "firebase/firestore";
 import { Card, CardHeader, CardBody, CardFooter, Divider, Button, Input, Select, SelectItem } from "@nextui-org/react";
@@ -13,7 +13,9 @@ import { FaRegImages } from "react-icons/fa";
 import { TbStatusChange } from "react-icons/tb";
 import { BiCategory } from "react-icons/bi";
 import { toast } from "react-toastify"
-
+import { AuthContext } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
+// import { useRouter } from "next/router";
 
 const fetchStatusDataFromFirestore = async () => {
     const querySnapshot = await getDocs(collection(db, "status"))
@@ -64,6 +66,10 @@ const AddMeme = () => {
     const inputFileRef = useRef(null);
 
     const [isLoading, setIsLoading] = useState(false);
+    const { authData, setAuthData } = useContext(AuthContext)
+    const router = useRouter()
+
+
 
     const handleStatusChange = (e) => {
         setStatus(e.target.value);
@@ -118,7 +124,7 @@ const AddMeme = () => {
             try {
                 const statusData = await fetchStatusDataFromFirestore();
                 setStatusGetData(statusData);
-                
+
                 if (statusData.length > 0) {
                     setStatus(statusData[0]?.statusID);
                 }
@@ -132,7 +138,7 @@ const AddMeme = () => {
             try {
                 const categoryData = await fetchCategoryDataFromFirestore();
                 setCategoryGetData(categoryData);
-                
+
                 if (categoryData.length > 0) {
                     setCategory(categoryData[0]?.categoryID);
                 }
@@ -143,7 +149,10 @@ const AddMeme = () => {
         fetchCategoryData();
     }, [])
 
-
+    if (!authData?.isAuthenticated) {
+        router.push('/sign-in');
+        return null;
+    }
     return (
         <>
             <div className="overflow-x-hidden overflow-y-auto px-4 md:px-8">
@@ -283,7 +292,7 @@ const AddMeme = () => {
                                         Saving
                                     </Button>
                             }
-                            <Button type="button" onClick={() => {resetForm()}} size="lg" variant="bordered" className="!w-1/2 border-gray-200/30 font-semibold text-white/70" startContent={<RxReset />}>
+                            <Button type="button" onClick={() => { resetForm() }} size="lg" variant="bordered" className="!w-1/2 border-gray-200/30 font-semibold text-white/70" startContent={<RxReset />}>
                                 Reset
                             </Button>
                         </div>

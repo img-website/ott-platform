@@ -11,8 +11,17 @@ import { signOut } from 'firebase/auth';
 import { auth } from '@/app/firebase/config';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useContext } from 'react';
+import { AuthContext } from '@/context/AuthContext';
 
 const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }) => {
+    const { authData, setAuthData } = useContext(AuthContext)
+
+    const logoutHandler = async()=>{
+        // setAuthData(pre=>({...pre,}))
+        setAuthData(pre => ({ ...pre, userId: "", userData: {}, isAuthenticated: false }))
+
+    }
     return (
         <>
             <div>
@@ -42,11 +51,7 @@ const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }) => {
                     </div>
                     <div className='w-full'>
                         <Button
-                            onClick={() => {
-                                setSidebarIsOpen(false)
-                                signOut(auth)
-                                sessionStorage.removeItem('user')
-                            }}
+                            onClick={logoutHandler}
                             variant="solid" className='w-full font-medium xl:text-base text-sm bg-rose-600 text-white' endContent={<IoMdLogOut />} >
                             Logout
                         </Button>
