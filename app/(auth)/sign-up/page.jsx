@@ -1,9 +1,10 @@
 "use client"
 import { auth } from '@/app/firebase/config';
+import { AuthContext } from '@/context/AuthContext';
 import { Button } from '@nextui-org/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 
 const SignUp = () => {
@@ -12,18 +13,25 @@ const SignUp = () => {
 
     const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
     const router = useRouter()
+    const { authData, setAuthData } = useContext(AuthContext)
 
     const handleSignUp = async () => {
         try {
             const res = await createUserWithEmailAndPassword(email, password)
-            console.log({ res })
-            sessionStorage.setItem('user', true)
-            setEmail('')
-            setPassword('')
-            router.push('/')
+            if (res) {
+                setAuthData(pre => ({ ...pre, userId: res?.user?.uid, userData: res?.user, isAuthenticated: true }))
+                // localStorage.setItem('token', res?.user?.uid)
+                setEmail('')
+                setPassword('')
+                router.push('/')
+            }
         } catch (error) {
             console.error(error);
         }
+    }
+    if (authData?.isAuthenticated) {
+        router.push('/');
+        return null;
     }
     return (
         <div className='min-h-dvh flex items-center justify-center bg-gray-900'>

@@ -14,10 +14,6 @@ const SignIn = () => {
     const router = useRouter()
     const { authData, setAuthData } = useContext(AuthContext)
 
-    if (authData?.isAuthenticated) {
-        router.push('/');
-        return null;
-    }
     const handleSignIn = async () => {
         try {
             const res = await signInWithEmailAndPassword(email, password)
@@ -31,6 +27,10 @@ const SignIn = () => {
         } catch (error) {
             console.error("error", error);
         }
+    }
+    if (authData?.isAuthenticated) {
+        router.push('/');
+        return null;
     }
     return (
         <div className='min-h-dvh flex items-center justify-center bg-gray-900'>

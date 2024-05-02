@@ -1,3 +1,4 @@
+import AuthContextProvider from "@/context/AuthContext";
 import "./globals.scss";
 import MainLayoutContent from "./mainLayoutContent";
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -8,9 +9,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <MainLayoutContent>
-      {children}
-      <SpeedInsights/>
-    </MainLayoutContent>
+    <AuthContextProvider>
+      <MainLayoutContent>
+        {children}
+        <SpeedInsights />
+      </MainLayoutContent>
+    </AuthContextProvider>
+
   );
 }
