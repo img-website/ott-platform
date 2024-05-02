@@ -3,6 +3,7 @@ import HeroSwiper from "@/components/HeroSwiper";
 import Swiper2 from "@/components/Swiper2";
 import { getAllData } from "@/app/firebase/config";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
   const fetchAllMemeData = async () => {
     try {
       const statusData = await getAllData('allmemes');
+      alert("runnnig")
       setAllMeme(statusData);
     } catch (error) {
       toast.error(error)

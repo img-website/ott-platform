@@ -42,10 +42,9 @@ const addDataToFireStore = async (name, downloadURL, url, status, category) => {
             image: downloadURL,
             url: url,
             wishlist: false,
-            statusID: status,
-            categoryID: category
+            statusID: Number(status),
+            categoryID: Number(category)
         });
-        // console.log("Document written with ID: ", docRef.id);
         return true;
     } catch (error) {
         toast.error(error);
