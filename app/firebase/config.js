@@ -39,6 +39,19 @@ export const getById = async (collectionName, filterByKey, filterOperator, filte
 
         const snapshot = await getDocs(q);
         const data = snapshot.docs.length > 0 ? { ...snapshot.docs[0].data(), id: snapshot.docs[0].id } : null; // Extract data and add ID, or return null
+        return data; // Return the user object or null
+    } catch (error) {
+        console.error('error.message>>>>getById>>>>>>>>>', error);
+    }
+}
+
+export const getByFilter = async (collectionName, filterByKey, filterOperator, filterValue) => {
+    try {
+        const dataCollection = collection(db, collectionName);
+        const q = query(dataCollection, where(filterByKey, filterOperator, filterValue)); // Query by email
+
+        const snapshot = await getDocs(q);
+        const data = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })); // Extract data and add ID
 
         return data; // Return the user object or null
     } catch (error) {

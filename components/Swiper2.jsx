@@ -11,16 +11,14 @@ import { FaRegHeart } from 'react-icons/fa';
 import Link from 'next/link';
 
 // import { collection, getDocs, query, where } from "firebase/firestore";
-import { getById } from '@/app/firebase/config';
+import { getByFilter, getById } from '@/app/firebase/config';
 import { toast } from 'react-toastify';
 
 const Swiper2 = ({ heading, viewMore, filterByStatus }) => {
     const navigationPrevRef = useRef(null)
     const navigationNextRef = useRef(null)
     const [statusIdData, setStatusIdData] = useState();
-    const [getAllMemeData, setGetAllMemeData] = useState();
-
-    console.log(getAllMemeData)
+    const [getAllMemeData, setGetAllMemeData] = useState([]);
 
     const fetchStatusData = async () => {
         try {
@@ -33,7 +31,7 @@ const Swiper2 = ({ heading, viewMore, filterByStatus }) => {
     const fetchAllMemeData = async () => {
         try {
             if (statusIdData) {
-                const allMemeData = await getById('allmemes', 'statusID', '==', statusIdData);
+                const allMemeData = await getByFilter('allmemes', 'statusID', '==', statusIdData);
                 setGetAllMemeData(allMemeData);
             }
         } catch (error) {
@@ -46,10 +44,9 @@ const Swiper2 = ({ heading, viewMore, filterByStatus }) => {
     }, [])
 
     useEffect(() => {
+
         fetchAllMemeData();
     }, [statusIdData])
-
-
 
     return (
         <div className='md:py-8 py-6 px-0 md:px-8'>
