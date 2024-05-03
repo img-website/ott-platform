@@ -3,7 +3,6 @@ import Sidebar from "@/components/layouts/Sidebar";
 import "./globals.scss";
 import Navbar from "@/components/layouts/Navbar";
 import { useEffect, useState } from "react";
-import AuthContextProvider from "@/context/AuthContext";
 import { usePathname } from "next/navigation";
 export const metadata = {
   title: "Create Next App",
@@ -14,7 +13,6 @@ export default function MainLayoutContent({ children }) {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false)
   const pathName = usePathname()
   const [loginLayout, setLoginLayout] = useState(false)
-  console.log({ pathName })
 
   useEffect(() => {
     setLoginLayout(pathName == '/sign-in' || pathName == '/sign-up')
@@ -23,7 +21,6 @@ export default function MainLayoutContent({ children }) {
   return (
     <html lang="en">
       <body className="font-poppins">
-        {/* <AuthContextProvider> */}
         <div className="flex h-dvh min-h-svh bg-gray-950 text-white overflow-hidden relative lg:px-5">
 
           {loginLayout ? <></> : <Sidebar sidebarIsOpen={sidebarIsOpen} setSidebarIsOpen={setSidebarIsOpen} />}
@@ -33,7 +30,6 @@ export default function MainLayoutContent({ children }) {
             {children}
           </div>
         </div>
-        {/* </AuthContextProvider> */}
       </body>
     </html>
   );

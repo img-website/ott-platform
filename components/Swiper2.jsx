@@ -7,7 +7,7 @@ import { Pagination, Navigation } from 'swiper/modules';
 import { Button } from '@nextui-org/button';
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useEffect, useRef, useState } from 'react';
-import { FaRegHeart } from 'react-icons/fa';
+// import { FaRegHeart } from 'react-icons/fa';
 import Link from 'next/link';
 
 // import { collection, getDocs, query, where } from "firebase/firestore";
@@ -108,9 +108,9 @@ const Swiper2 = ({ heading, viewMore, filterByStatus }) => {
             >
                 {getAllMemeData && Array.isArray(getAllMemeData) && getAllMemeData?.map((item) => (
                     <SwiperSlide key={item?.id} className='p-1 relative group'>
-                        <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
+                        {/* <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
                             <FaRegHeart />
-                        </Button>
+                        </Button> */}
                         <Link href={item?.url} target='_blank'>
                             <Image priority className='rounded-xl md:rounded-3xl shadow-xl shadow-gray-900 ring-2 ring-white/20 w-full aspect-[10/15] object-cover' width={200} height={200} src={item?.image} alt={item?.name} />
                             <div className='md:text-sm text-xs text-gray-100 line-clamp-2 my-2 mx-2'>{item?.name}</div>
