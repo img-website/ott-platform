@@ -1,7 +1,7 @@
 // import { getApp, getApps, initializeApp } from "firebase/app";
 import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth'
-import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, query, where, limit } from 'firebase/firestore'
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
@@ -48,7 +48,7 @@ export const getById = async (collectionName, filterByKey, filterOperator, filte
 export const getByFilter = async (collectionName, filterByKey, filterOperator, filterValue) => {
     try {
         const dataCollection = collection(db, collectionName);
-        const q = query(dataCollection, where(filterByKey, filterOperator, filterValue)); // Query by email
+        const q = query(dataCollection, where(filterByKey, filterOperator, filterValue), limit(10)); // Query by email
 
         const snapshot = await getDocs(q);
         const data = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })); // Extract data and add ID

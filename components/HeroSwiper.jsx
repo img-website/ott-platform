@@ -5,8 +5,8 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
 import { EffectCoverflow, Pagination } from 'swiper/modules';
-import { Button } from '@nextui-org/button';
-import { FaRegHeart } from 'react-icons/fa';
+// import { Button } from '@nextui-org/button';
+// import { FaRegHeart } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
@@ -108,9 +108,9 @@ const HeroSwiper = ({ allMeme }) => {
             >
                 {data && Array.isArray(data) && data.map((item) => (
                     <SwiperSlide key={item?.id} className='overflow-hidden rounded-xl md:rounded-3xl shadow-xl shadow-gray-900 relative group'>
-                        <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
+                        {/* <Button isIconOnly color="danger" aria-label="Like" className='absolute top-4 right-4 z-10 group-hover:opacity-100 opacity-0 transition-all'>
                             <FaRegHeart />
-                        </Button>
+                        </Button> */}
                         <Link href={item?.url} target='_blank'>
                             <Image className='w-full aspect-[10/15] object-cover' priority width={200} height={200} src={item?.image} alt={item?.name} />
                         </Link>

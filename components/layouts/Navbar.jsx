@@ -26,9 +26,9 @@ const Navbar = ({sidebarIsOpen, setSidebarIsOpen}) => {
             </div>
             <div className="w-auto">
                 <div className="flex gap-4 items-center">
-                    <Button as={Link} href="/favorite" className="max-lg:hidden" isIconOnly color="danger" aria-label="Favorite">
+                    {/* <Button as={Link} href="/favorite" className="max-lg:hidden" isIconOnly color="danger" aria-label="Favorite">
                         <FaRegHeart className="text-xl" />
-                    </Button>
+                    </Button> */}
 
                     <Button className="lg:hidden" isIconOnly color="danger" aria-label="Search">
                         <IoSearch className="text-xl" />
