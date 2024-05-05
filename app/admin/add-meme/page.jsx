@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { db, storage } from "@/app/firebase/config";
+import { db, getAllData, storage } from "@/app/firebase/config";
 import { addDoc, getDocs, collection } from "firebase/firestore";
 import { Card, CardHeader, CardBody, CardFooter, Divider, Button, Input, Select, SelectItem } from "@nextui-org/react";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage"
@@ -15,17 +15,6 @@ import { BiCategory } from "react-icons/bi";
 import { toast } from "react-toastify"
 import { AuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-// import { useRouter } from "next/router";
-
-const fetchStatusDataFromFirestore = async () => {
-    const querySnapshot = await getDocs(collection(db, "status"))
-
-    const statusData = [];
-    querySnapshot.forEach((doc) => {
-        statusData.push({ id: doc.id, ...doc.data() });
-    })
-    return statusData;
-};
 
 const fetchCategoryDataFromFirestore = async () => {
     const querySnapshot = await getDocs(collection(db, "category"))
@@ -71,13 +60,31 @@ const AddMeme = () => {
 
 
 
-    const handleStatusChange = (e) => {
-        setStatus(e.target.value);
-    };
 
-    const handleCategoryChange = (e) => {
-        setCategory(e.target.value);
-    };
+    const fetchStatusData = async () => {
+        try {
+            const statusData = await getAllData('status');
+            setStatusGetData(statusData);
+        } catch (error) {
+            toast.error(error)
+        }
+    }
+    useEffect(() => {
+        fetchStatusData();
+    }, [])
+
+    const fetchCategoryData = async () => {
+        try {
+            const categoriesData = await getAllData('categories');
+            setCategoryGetData(categoriesData);
+        } catch (error) {
+            toast.error(error)
+        }
+    }
+    useEffect(() => {
+        fetchCategoryData();
+    }, [])
+
 
     const resetForm = () => {
         setName("");
@@ -89,6 +96,7 @@ const AddMeme = () => {
             inputFileRef.current.value = "";
         }
     }
+
 
     const handleSubmit = async (downloadURL) => {
         setIsLoading(true)
@@ -108,7 +116,7 @@ const AddMeme = () => {
             return;
 
         setIsLoading(true)
-        const storages = ref(storage, `/images/${image.name}`)
+        const storages = ref(storage, `/media/${image.name}`)
         uploadBytes(storages, image)
             .then((snapshot) => {
                 getDownloadURL(snapshot.ref)
@@ -149,8 +157,8 @@ const AddMeme = () => {
         fetchCategoryData();
     }, [])
 
-    if (!authData?.isAuthenticated) {
-        router.push('/sign-in');
+    if (authData?.isAuthenticated) {
+        router.push('/admin/add-meme');
         return null;
     }
     return (
@@ -206,6 +214,26 @@ const AddMeme = () => {
                                 onValueChange={setUrl}
                             />
                         </div>
+                        <div className="mb-4 sm:col-span-2">
+                            <Input
+                                classNames={{
+                                    base: "cursor-pointer",
+                                    inputWrapper: "border-gray-400 data-[hover=true]:border-gray-300 group-data-[focus=true]:border-gray-200 cursor-pointer",
+                                    label: "group-data-[filled-within=true]:text-gray-300 cursor-pointer",
+                                    innerWrapper: "cursor-pointer",
+                                    input: "text-gray-200 text-sm cursor-pointer file:mr-2 file:py-0 file:px-1 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 file:cursor-pointer",
+                                }}
+                                label="Upload Image/Video"
+                                isRequired
+                                size="lg"
+                                variant="bordered"
+                                startContent={<FaRegImages size={18} />}
+                                type="file"
+                                id="image"
+                                ref={inputFileRef}
+                                onChange={(e) => setImage(e.target.files?.[0])}
+                            />
+                        </div>
                         <div className="mb-4">
                             <Select
                                 classNames={{
@@ -223,7 +251,7 @@ const AddMeme = () => {
                                 startContent={<TbStatusChange size={18} />}
                                 id="status"
                                 selectedKeys={[status]}
-                                onChange={handleStatusChange}
+                                onChange={(e)=>{setStatus(e.target.value)}}
                             >
                                 {statusGetData ? statusGetData?.map((item) => (
                                     <SelectItem className="capitalize font-semibold" key={item?.statusID} value={item?.statusID}>
@@ -249,7 +277,7 @@ const AddMeme = () => {
                                 startContent={<BiCategory size={18} />}
                                 id="category"
                                 selectedKeys={[category]}
-                                onChange={handleCategoryChange}
+                                onChange={(e)=>{setCategory(e.target.value)}}
                             >
                                 {categoryGetData ? categoryGetData?.map((item) => (
                                     <SelectItem className="capitalize font-semibold" key={item?.categoryID} value={item?.categoryID}>
@@ -257,26 +285,6 @@ const AddMeme = () => {
                                     </SelectItem>
                                 )) : ''}
                             </Select>
-                        </div>
-                        <div className="mb-4 sm:col-span-2">
-                            <Input
-                                classNames={{
-                                    base: "cursor-pointer",
-                                    inputWrapper: "border-gray-400 data-[hover=true]:border-gray-300 group-data-[focus=true]:border-gray-200 cursor-pointer",
-                                    label: "group-data-[filled-within=true]:text-gray-300 cursor-pointer",
-                                    innerWrapper: "cursor-pointer",
-                                    input: "text-gray-200 text-sm cursor-pointer file:mr-2 file:py-0 file:px-1 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 file:cursor-pointer",
-                                }}
-                                label="Upload Image"
-                                isRequired
-                                size="lg"
-                                variant="bordered"
-                                startContent={<FaRegImages size={18} />}
-                                type="file"
-                                id="image"
-                                ref={inputFileRef}
-                                onChange={(e) => setImage(e.target.files?.[0])}
-                            />
                         </div>
                     </CardBody>
                     <Divider />

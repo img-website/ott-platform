@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import { IoMdLogOut } from "react-icons/io";
 import { Button } from '@nextui-org/button';

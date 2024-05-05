@@ -1,6 +1,6 @@
 "use client"
-import HeroSwiper from "@/components/HeroSwiper";
-import Swiper2 from "@/components/Swiper2";
+import HeroSwiper from "@/components/admin/HeroSwiper";
+import Swiper2 from "@/components/admin/Swiper2";
 import { getAllData } from "@/app/firebase/config";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -25,9 +25,7 @@ export default function Home() {
   return (
     <>
       <div className="overflow-x-hidden overflow-y-auto px-4 md:px-8">
-        {
-          allMeme?.length ? <HeroSwiper allMeme={allMeme} /> : ''
-        }
+        <HeroSwiper allMeme={allMeme} />
         <Swiper2 heading={"Trending Clips"} viewMore={'/trending'} filterByStatus={'Trending'} />
         <Swiper2 heading={"New Viral"} viewMore={'/new-viral'} filterByStatus={'New'} />
       </div>

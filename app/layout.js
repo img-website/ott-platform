@@ -1,6 +1,6 @@
 import AuthContextProvider from "@/context/AuthContext";
 import "./globals.scss";
-import MainLayoutContent from "./mainLayoutContent";
+// import MainLayoutContent from "./mainLayoutContent";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 export const metadata = {
   title: "Create Next App",
@@ -9,12 +9,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <AuthContextProvider>
-      <MainLayoutContent>
-        {children}
-        <SpeedInsights />
-      </MainLayoutContent>
-    </AuthContextProvider>
+    <html lang="en">
+      <body className="font-poppins">
+        <AuthContextProvider>
+          {/* <MainLayoutContent> */}
+          {children}
+          <SpeedInsights />
+          {/* </MainLayoutContent> */}
+        </AuthContextProvider>
+      </body>
+    </html >
 
   );
 }
