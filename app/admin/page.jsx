@@ -3,51 +3,59 @@ import { auth } from '@/app/firebase/config';
 import { AuthContext } from '@/context/AuthContext';
 import { Button } from '@nextui-org/button';
 import { Card, CardBody, CardFooter, CardHeader, Divider, Input } from '@nextui-org/react';
-import Link from 'next/link';
+import { RiLoginCircleLine } from "react-icons/ri";
 import { useRouter } from 'next/navigation'
 import { useContext, useState } from 'react'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
-import { FiEdit2 } from 'react-icons/fi';
-import { IoMdAddCircleOutline } from 'react-icons/io';
-import { MdDriveFileRenameOutline } from 'react-icons/md';
-import { RxReset } from 'react-icons/rx';
+import { IoMdAddCircleOutline, IoIosKeypad } from 'react-icons/io';
+import { HiOutlineMail } from "react-icons/hi";
+import { BiLockOpenAlt } from "react-icons/bi";
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
     const router = useRouter()
     const { authData, setAuthData } = useContext(AuthContext)
 
-    const handleSignIn = async () => {
+    const handleSignIn = async (e) => {
+        e.preventDefault();
         try {
+            setIsLoading(true)
             const res = await signInWithEmailAndPassword(email, password)
             if (res) {
                 setAuthData(pre => ({ ...pre, userId: res?.user?.uid, userData: res?.user, isAuthenticated: true }))
                 // localStorage.setItem('token', res?.user?.uid)
                 setEmail('')
                 setPassword('')
-                router.push('/')
+                toast.success("Login Successfully!");
+                router.push('/admin/dashboard')
+                setIsLoading(false)
             }
         } catch (error) {
+            setIsLoading(false)
             console.error("error", error);
         }
+        console.log(authData)
     }
     if (authData?.isAuthenticated) {
-        router.push('/');
+        router.push('/admin/dashboard');
         return null;
     }
     return (
-        <div className='min-h-dvh flex items-center justify-center bg-gray-900'>
+        !authData?.isAuthenticated && (
+            <div className='min-h-dvh flex items-center justify-center bg-gray-900'>
                 <Card as={"form"} onSubmit={handleSignIn} className="w-96 bg-gray-800 text-white mx-auto has-[[aria-label=Loading]]:!pointer-events-none [&_label]:has-[[aria-label=Loading]]:!pointer-events-none">
-                    <CardHeader className="flex gap-3">
-                        <FiEdit2 className="size-6" />
+                    <CardHeader className="flex gap-3 justify-center">
+                        <IoIosKeypad className="size-6" />
                         <div className="flex flex-col">
                             <p className="text-lg font-bold">Sign In</p>
                         </div>
                     </CardHeader>
                     <Divider />
-                    <CardBody className="bg-gray-900 grid sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-3">
+                    <CardBody className="bg-gray-900/50 grid grid-cols-1 gap-x-6 gap-y-3">
                         <div className="mb-4">
                             <Input
                                 classNames={{
@@ -61,7 +69,7 @@ const SignIn = () => {
                                 isRequired
                                 size="lg"
                                 variant="bordered"
-                                startContent={<MdDriveFileRenameOutline size={18} />}
+                                startContent={<HiOutlineMail size={18} />}
                                 type="email"
                                 id="email"
                                 value={email}
@@ -81,7 +89,7 @@ const SignIn = () => {
                                 isRequired
                                 size="lg"
                                 variant="bordered"
-                                startContent={<MdDriveFileRenameOutline size={18} />}
+                                startContent={<BiLockOpenAlt size={18} />}
                                 type="password"
                                 id="password"
                                 value={password}
@@ -94,22 +102,21 @@ const SignIn = () => {
                         <div className="flex gap-4 items-center w-full">
                             {
                                 !isLoading ?
-                                    <Button type="submit" variant="solid" size="lg" className="!w-1/2 bg-purple-700 text-white font-semibold [&_svg]:has-[[aria-label=Loading]]:hidden [&_[aria-label=Loading]>*]:size-4" startContent={<IoMdAddCircleOutline />}>
+                                    <Button type="submit" variant="solid" size="lg" className="!w-full bg-purple-700 text-white font-semibold [&_svg]:has-[[aria-label=Loading]]:hidden [&_[aria-label=Loading]>*]:size-4" startContent={<RiLoginCircleLine />}>
                                         Sign In
                                     </Button>
                                     :
-                                    <Button type="submit" variant="solid" isLoading size="lg" className="!w-1/2 bg-purple-700 text-white font-semibold [&_svg]:has-[[aria-label=Loading]]:hidden [&_[aria-label=Loading]>*]:size-4" startContent={<IoMdAddCircleOutline />}>
+                                    <Button type="submit" variant="solid" isLoading size="lg" className="!w-full bg-purple-700 text-white font-semibold [&_svg]:has-[[aria-label=Loading]]:hidden [&_[aria-label=Loading]>*]:size-4" startContent={<IoMdAddCircleOutline />}>
                                         Loging
                                     </Button>
                             }
-                            <div>
-                                <Link className='text-white' href={'/sign-up'}>I&apos;m New Here</Link>
-                            </div>
                         </div>
                     </CardFooter>
                 </Card>
-        </div>
+            </div>
+        )
     )
+
 }
 
 export default SignIn

@@ -20,7 +20,7 @@ const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }) => {
 
     const logoutHandler = async () => {
         setAuthData(pre => ({ ...pre, userId: "", userData: {}, isAuthenticated: false }))
-        router.push('/sign-in')
+        router.push('/admin')
         signOut(auth)
     }
     return (
@@ -61,7 +61,7 @@ const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }) => {
                             </div>
                         ) : (
                             <div className='w-full'>
-                                <Button as={Link} href='/sign-in'
+                                <Button as={Link} href='/admin'
                                     variant="solid" className='w-full font-medium xl:text-base text-sm bg-purple-600 text-white' endContent={<AiOutlineLogin />} >
                                     Log In
                                 </Button>
